@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Business TV – Vidéos Directes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#121212;
+  color:#fff;
+  overflow-x:hidden;
+}
+header{
+  position:sticky;
+  top:0;
+  background:#1f1f1f;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+  box-shadow:0 2px 5px rgba(0,0,0,0.5);
+}
+.header-title{
+  font-size:22px;
+  font-weight:bold;
+  color:#4ea1ff;
+}
+.header-icon{
+  width:40px;
+  height:40px;
+  cursor:pointer;
+}
+.category{
+  margin:25px 0;
+}
+.category h2{
+  margin:0 0 10px 20px;
+  font-size:20px;
+  color:#4ea1ff;
+}
+.row{
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding:0 20px 20px 20px;
+  scroll-behavior:smooth;
+}
+.video-card{
+  min-width:300px;
+  background:#1a1a1a;
+  border-radius:12px;
+  overflow:hidden;
+  flex-shrink:0;
+  position:relative;
+  box-shadow:0 2px 8px rgba(0,0,0,0.6);
+  display:flex;
+  flex-direction:column;
+}
+.video-wrapper{
+  position:relative;
+  width:100%;
+  padding-top:56.25%; /* ratio 16:9 */
+}
+.video-wrapper iframe{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border-radius:12px 12px 0 0;
+}
+.video-title{
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  color:#4ea1ff;
+  font-size:16px;
+  font-weight:bold;
+  text-shadow:1px 1px 5px rgba(0,0,0,0.7);
+  z-index:10;
+}
+.comments{
+  padding:10px;
+  background:#1f1f1f;
+  font-size:14px;
+}
+.comment{
+  background:#2a2a2a;
+  padding:6px;
+  border-radius:5px;
+  margin-bottom:5px;
+}
+.actions{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:10px;
+  background:#1b1b1b;
+}
+.actions button,
+.actions a{
+  background:none;
+  border:none;
+  color:#4ea1ff;
+  font-size:20px;
+  cursor:pointer;
+  text-decoration:none;
+}
+footer{
+  background:#1f1f1f;
+  color:#777;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+  position:sticky;
+  bottom:0;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">Business TV</div>
+  <img src="https://raw.githubusercontent.com/Lfg237/business-tv/main/Polish_20260210_113721977.png" class="header-icon" alt="Icône site">
+</header>
+
+<div id="categories-container">
+
+<!-- ===== Catégorie 1 : Marketing ===== -->
+<div class="category">
+<h2>Marketing</h2>
+<div class="row">
+  <div class="video-card" data-id="marketing1">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/in-shot-20250618-050312535" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Astuce Marketing 1</div>
+    </div>
+    <div class="comments">
+      <div class="comment">📈 Astuce marketing 1</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+
+  <div class="video-card" data-id="marketing2">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/vid-20260201-wa-0027" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Astuce Marketing 2</div>
+    </div>
+    <div class="comments">
+      <div class="comment">📈 Astuce marketing 2</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Catégorie 2 : Commerce ===== -->
+<div class="category">
+<h2>Commerce</h2>
+<div class="row">
+  <div class="video-card" data-id="commerce1">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/in-shot-20250618-050312535" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Astuce Commerce 1</div>
+    </div>
+    <div class="comments">
+      <div class="comment">🛒 Astuce commerce 1</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+
+  <div class="video-card" data-id="commerce2">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/vid-20260201-wa-0027" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Astuce Commerce 2</div>
+    </div>
+    <div class="comments">
+      <div class="comment">🛒 Astuce commerce 2</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Catégorie 3 : Emploi ===== -->
+<div class="category">
+<h2>Recherche d'emploi</h2>
+<div class="row">
+  <div class="video-card" data-id="emploi1">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/in-shot-20250618-050312535" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">CV & Entretien 1</div>
+    </div>
+    <div class="comments">
+      <div class="comment">💼 CV et entretien 1</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+
+  <div class="video-card" data-id="emploi2">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/vid-20260201-wa-0027" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">CV & Entretien 2</div>
+    </div>
+    <div class="comments">
+      <div class="comment">💼 CV et entretien 2</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Catégorie 4 : Brocante ===== -->
+<div class="category">
+<h2>Brocante</h2>
+<div class="row">
+  <div class="video-card" data-id="brocante1">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/in-shot-20250618-050312535" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Brocante 1</div>
+    </div>
+    <div class="comments">
+      <div class="comment">🪙 Astuce brocante 1</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+
+  <div class="video-card" data-id="brocante2">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/vid-20260201-wa-0027" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Brocante 2</div>
+    </div>
+    <div class="comments">
+      <div class="comment">🪙 Astuce brocante 2</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== Catégorie 5 : Voyage ===== -->
+<div class="category">
+<h2>Voyage</h2>
+<div class="row">
+  <div class="video-card" data-id="voyage1">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/in-shot-20250618-050312535" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Voyage 1</div>
+    </div>
+    <div class="comments">
+      <div class="comment">✈️ Destination 1</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+
+  <div class="video-card" data-id="voyage2">
+    <div class="video-wrapper">
+      <iframe src="https://archive.org/embed/vid-20260201-wa-0027" allowfullscreen frameborder="0"></iframe>
+      <div class="video-title">Voyage 2</div>
+    </div>
+    <div class="comments">
+      <div class="comment">✈️ Destination 2</div>
+    </div>
+    <div class="actions">
+      <a href="https://wa.me/670035609">💬</a>
+      <a href="tel:656050097">📞</a>
+      <button class="copy-link">🔗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+</div> <!-- Fin categories-container -->
+
+<footer>Business TV – Lecture directe et liens uniques par vidéo</footer>
+
+<script>
+// ===== COPIER LIEN UNIQUE =====
+document.querySelectorAll(".copy-link").forEach(button=>{
+  button.addEventListener("click", function(){
+    const videoCard = this.closest(".video-card");
+    const videoId = videoCard.dataset.id;
+    const url = `${window.location.origin}?video=${videoId}`;
+    navigator.clipboard.writeText(url);
+    alert("Lien copié : " + url);
+  });
+});
+
+// ===== LIRE VIDEO SPECIFIQUE AU DEMARRAGE =====
+const params = new URLSearchParams(window.location.search);
+const videoId = params.get("video");
+if(videoId){
+  const targetCard = document.querySelector(`.video-card[data-id="${videoId}"]`);
+  if(targetCard){
+    targetCard.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+}
+</script>
+
+</body>
+</html>
