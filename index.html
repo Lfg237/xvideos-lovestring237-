@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Business TV – 18+</title>
+<title>xvideos – 18+</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {
+body{
   margin:0;
   font-family:'Segoe UI', sans-serif;
   background:#121212;
@@ -44,8 +44,8 @@ header{
   scroll-behavior:smooth;
 }
 .video-card{
-  min-width:300px;
-  max-width:320px;
+  min-width:350px;
+  max-width:350px;
   background:#1a1a1a;
   border-radius:12px;
   overflow:hidden;
@@ -58,17 +58,14 @@ header{
 .video-wrapper{
   position:relative;
   width:100%;
-  height:250px;
   background:#000;
 }
 .video-wrapper video{
-  position:absolute;
-  top:0;
-  left:0;
   width:100%;
-  height:100%;
-  border:0;
-  object-fit:contain;
+  height:auto;
+  border-radius:12px 12px 0 0;
+  display:block;
+  cursor:pointer;
 }
 .video-title{
   position:absolute;
@@ -127,15 +124,21 @@ footer{
   margin-bottom:20px;
   text-align:center;
 }
-.modal button, .modal input{
-  margin:5px;
+.modal input{
+  padding:10px;
+  font-size:16px;
+  border-radius:6px;
+  border:none;
+  margin-bottom:10px;
+  text-align:center;
+}
+.modal button{
+  margin:10px;
   padding:12px 25px;
   font-size:16px;
   border:none;
   border-radius:8px;
   cursor:pointer;
-}
-.modal button{
   background:#4ea1ff;
   color:#fff;
   transition:0.2s;
@@ -143,74 +146,90 @@ footer{
 .modal button:hover{
   background:#3390ff;
 }
-.modal input{
-  width:180px;
-}
 </style>
 </head>
 <body>
 
 <!-- MODALE 18+ -->
 <div class="modal" id="modal18">
-  <h1>Êtes-vous majeur (18+) ?</h1>
+  <h1>Êtes-vous majeur (18+) ?</h1>
   <div>
     <button id="btnOui">Oui</button>
     <button id="btnNon">Non</button>
   </div>
 </div>
 
-<!-- MODALE ABONNEMENT -->
-<div class="modal" id="modalAbonnement" style="display:none;flex-direction:column;">
-  <h1>Quota dépassé</h1>
-  <p>Renouvelez votre abonnement. Contact WhatsApp : 658412230</p>
-  <p>Entrez le code d'accès :</p>
-  <input type="password" id="codeAcces" placeholder="Code">
-  <button id="btnValiderCode">Valider</button>
+<!-- MODALE CODE D'ACCÈS -->
+<div class="modal" id="modalCode" style="display:none;">
+  <h1>Quota atteint !</h1>
+  <p>Renouvelez votre abonnement 100xaf pour 24h. Contact WhatsApp : 658412230</p>
+  <input type="password" id="inputCode" placeholder="Entrez le code d'accès">
+  <button id="btnCodeValider">Valider</button>
 </div>
 
 <header>
-  <div class="header-title">Business TV 18+</div>
+  <div class="header-title"> 🔞xvideos lovestring237 18+</div>
 </header>
 
 <div id="categories-container"></div>
 
-<footer>Business TV – 18+ Only</footer>
+<footer>Business TV – 18+ Only</footer>
 
 <script>
-// ==============================
-// CONFIGURATION CATÉGORIES + VIDÉOS
-// ==============================
-const videoLinks = [
-  "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-  "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-  "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-  "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-];
-
 const categories = {
-  "Hétéro": videoLinks,
-  "Lesbienne": videoLinks,
-  "Homo": videoLinks,
-  "Transgenre": videoLinks,
-  "Zoophilie": videoLinks,
-  "Exhibition": videoLinks
+  "Hétéro": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0008.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ],
+  "Lesbienne": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ],
+  "Homo": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ],
+  "Transgenre": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ],
+  "Zoophilie": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ],
+  "Exhibition": [
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
+    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
+  ]
 };
 
 const container = document.getElementById("categories-container");
-for (const cat in categories) {
+for(const cat in categories){
   const catDiv = document.createElement("div");
   catDiv.className = "category";
   catDiv.innerHTML = `<h2>${cat}</h2>`;
   const rowDiv = document.createElement("div");
   rowDiv.className = "row";
-
-  categories[cat].forEach((vid, index) => {
+  
+  categories[cat].forEach((vid, index)=>{
     const card = document.createElement("div");
     card.className = "video-card";
     card.dataset.id = `${cat}${index+1}`;
     card.innerHTML = `
       <div class="video-wrapper">
-        <video controls playsinline src="${vid}"></video>
+        <video src="${vid}"></video>
         <div class="video-title">${cat} ${index+1}</div>
       </div>
       <div class="actions">
@@ -219,84 +238,66 @@ for (const cat in categories) {
     `;
     rowDiv.appendChild(card);
   });
-
   catDiv.appendChild(rowDiv);
   container.appendChild(catDiv);
 }
 
 // ==============================
-// LOGIQUE 18+ & PARTAGE & ABONNEMENT
+// LOGIQUE 18+, QUOTA ET BLOQUAGE VIDEO
 // ==============================
-let compteur = 0;
+let compteur = localStorage.getItem('videos_vues') ? parseInt(localStorage.getItem('videos_vues')) : 0;
+let expiration = localStorage.getItem('videos_expiration') ? parseInt(localStorage.getItem('videos_expiration')) : 0;
 const limiteVideosGratuites = 2;
 const codeAccesCache = "233233";
-let acces24h = localStorage.getItem("acces24h");
+const now = Date.now();
 
-// MODALE 18+
+// Vérifie si l'accès 24h est actif
+let acces24h = now < expiration;
+
+// 18+
 const modal18 = document.getElementById("modal18");
+const modalCode = document.getElementById("modalCode");
+const inputCode = document.getElementById("inputCode");
 const btnOui = document.getElementById("btnOui");
 const btnNon = document.getElementById("btnNon");
-btnOui.addEventListener("click", ()=> modal18.style.display="none");
+const btnCodeValider = document.getElementById("btnCodeValider");
+
+btnOui.addEventListener("click", ()=>{
+  modal18.style.display = "none";
+});
 btnNon.addEventListener("click", ()=>{
   alert("Vous devez être majeur pour accéder au site.");
   window.close();
 });
 
-// MODALE ABONNEMENT
-const modalAbonnement = document.getElementById("modalAbonnement");
-const btnValiderCode = document.getElementById("btnValiderCode");
-const inputCode = document.getElementById("codeAcces");
-
-btnValiderCode.addEventListener("click", ()=>{
-  if(inputCode.value===codeAccesCache){
-    const expire = Date.now() + 24*60*60*1000;
-    localStorage.setItem("acces24h", expire);
-    modalAbonnement.style.display="none";
-    compteur = 0; // reset quota
-    alert("Accès vidéo débloqué 24h");
-  } else alert("Code incorrect");
-});
-
-// Vérifier l'accès 24h
-function verifierAcces(){
-  const expire = localStorage.getItem("acces24h");
-  if(expire && Date.now()<expire) return true;
-  return false;
-}
-
-// Partager le lien vidéo
-document.addEventListener("click", e=>{
-  if(e.target.classList.contains("copy-link")){
-    const videoCard = e.target.closest(".video-card");
-    const videoId = videoCard.dataset.id;
-    const url = `https://xvideos-lovestring237.vercel.app/?video=${videoId}`;
-    navigator.clipboard.writeText(url);
-    alert("Lien copié : "+url);
-  }
-});
-
-// ==================================
-// COMPTEUR LECTURE VIDÉO
-// ==================================
-document.querySelectorAll("video").forEach(video=>{
-  video.addEventListener("play", ()=>{
-    if(!verifierAcces()){
-      compteur++;
-      if(compteur > limiteVideosGratuites){
-        modalAbonnement.style.display = "flex";
-        video.pause();
-      }
+// Lecture vidéo : bloque si quota dépassé
+document.querySelectorAll("video").forEach(v=>{
+  v.addEventListener("click", ()=>{
+    if(!acces24h && compteur >= limiteVideosGratuites){
+      modalCode.style.display = "flex";
+      return;
     }
+    v.play();
+    compteur++;
+    localStorage.setItem('videos_vues', compteur);
   });
 });
 
-// Lecture vidéo spécifique par lien
-const params = new URLSearchParams(window.location.search);
-const videoId = params.get("video");
-if(videoId){
-  const targetCard = document.querySelector(`.video-card[data-id="${videoId}"]`);
-  if(targetCard) targetCard.scrollIntoView({behavior:"smooth", block:"center"});
-}
+// Validation code d'accès
+btnCodeValider.addEventListener("click", ()=>{
+  if(inputCode.value === codeAccesCache){
+    const expireTime = Date.now() + 24*60*60*1000;
+    localStorage.setItem('videos_expiration', expireTime);
+    compteur = 0;
+    localStorage.setItem('videos_vues', compteur);
+    acces24h = true;
+    modalCode.style.display = "none";
+    alert("Accès accordé pour 24h !");
+    inputCode.value = "";
+  } else {
+    alert("Code incorrect !");
+  }
+});
 </script>
 </body>
 </html>
