@@ -44,8 +44,7 @@ header{
   scroll-behavior:smooth;
 }
 .video-card{
-  min-width:350px;
-  max-width:350px;
+  min-width:300px;
   background:#1a1a1a;
   border-radius:12px;
   overflow:hidden;
@@ -58,14 +57,16 @@ header{
 .video-wrapper{
   position:relative;
   width:100%;
+  height:400px; /* hauteur adaptée */
   background:#000;
 }
-.video-wrapper video{
+.video-wrapper iframe, .video-wrapper video{
+  position:absolute;
+  top:0;
+  left:0;
   width:100%;
-  height:auto;
-  border-radius:12px 12px 0 0;
-  display:block;
-  cursor:pointer;
+  height:100%;
+  border:0;
 }
 .video-title{
   position:absolute;
@@ -124,14 +125,6 @@ footer{
   margin-bottom:20px;
   text-align:center;
 }
-.modal input{
-  padding:10px;
-  font-size:16px;
-  border-radius:6px;
-  border:none;
-  margin-bottom:10px;
-  text-align:center;
-}
 .modal button{
   margin:10px;
   padding:12px 25px;
@@ -150,21 +143,12 @@ footer{
 </head>
 <body>
 
-<!-- MODALE 18+ -->
 <div class="modal" id="modal18">
   <h1>Êtes-vous majeur (18+) ?</h1>
   <div>
     <button id="btnOui">Oui</button>
     <button id="btnNon">Non</button>
   </div>
-</div>
-
-<!-- MODALE CODE D'ACCÈS -->
-<div class="modal" id="modalCode" style="display:none;">
-  <h1>Quota atteint !</h1>
-  <p>Renouvelez votre abonnement. Contact WhatsApp : 658412230</p>
-  <input type="password" id="inputCode" placeholder="Entrez le code d'accès">
-  <button id="btnCodeValider">Valider</button>
 </div>
 
 <header>
@@ -176,6 +160,9 @@ footer{
 <footer>Business TV – 18+ Only</footer>
 
 <script>
+// ==============================
+// CONFIGURATION CATÉGORIES + VIDÉOS
+// ==============================
 const categories = {
   "Hétéro": [
     "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
@@ -215,6 +202,9 @@ const categories = {
   ]
 };
 
+// ==============================
+// GENERATION DU SITE
+// ==============================
 const container = document.getElementById("categories-container");
 for(const cat in categories){
   const catDiv = document.createElement("div");
@@ -222,14 +212,14 @@ for(const cat in categories){
   catDiv.innerHTML = `<h2>${cat}</h2>`;
   const rowDiv = document.createElement("div");
   rowDiv.className = "row";
-  
+
   categories[cat].forEach((vid, index)=>{
     const card = document.createElement("div");
     card.className = "video-card";
     card.dataset.id = `${cat}${index+1}`;
     card.innerHTML = `
       <div class="video-wrapper">
-        <video src="${vid}"></video>
+        <video src="${vid}" controls></video>
         <div class="video-title">${cat} ${index+1}</div>
       </div>
       <div class="actions">
@@ -238,29 +228,22 @@ for(const cat in categories){
     `;
     rowDiv.appendChild(card);
   });
+
   catDiv.appendChild(rowDiv);
   container.appendChild(catDiv);
 }
 
 // ==============================
-// LOGIQUE 18+, QUOTA ET BLOQUAGE VIDEO
+// LOGIQUE POPUP 18+ & PARTAGE & RESTRICTION
 // ==============================
-let compteur = localStorage.getItem('videos_vues') ? parseInt(localStorage.getItem('videos_vues')) : 0;
-let expiration = localStorage.getItem('videos_expiration') ? parseInt(localStorage.getItem('videos_expiration')) : 0;
+let compteur = 0;
 const limiteVideosGratuites = 2;
 const codeAccesCache = "233233";
-const now = Date.now();
+const dureeAcces = 24*60*60*1000; // 24h
 
-// Vérifie si l'accès 24h est actif
-let acces24h = now < expiration;
-
-// 18+
 const modal18 = document.getElementById("modal18");
-const modalCode = document.getElementById("modalCode");
-const inputCode = document.getElementById("inputCode");
 const btnOui = document.getElementById("btnOui");
 const btnNon = document.getElementById("btnNon");
-const btnCodeValider = document.getElementById("btnCodeValider");
 
 btnOui.addEventListener("click", ()=>{
   modal18.style.display = "none";
@@ -270,34 +253,51 @@ btnNon.addEventListener("click", ()=>{
   window.close();
 });
 
-// Lecture vidéo : bloque si quota dépassé
+// Vérifier accès précédent
+let accessExpire = localStorage.getItem("accessExpire");
+if(accessExpire && Date.now() < accessExpire){
+  compteur = limiteVideosGratuites;
+}
+
+// Partager le lien vidéo
+document.addEventListener("click", e=>{
+  if(e.target.classList.contains("copy-link")){
+    const videoCard = e.target.closest(".video-card");
+    const videoId = videoCard.dataset.id;
+    const url = `https://xvideos-lovestring237.vercel.app/?video=${videoId}`;
+    navigator.clipboard.writeText(url);
+    alert("Lien copié : " + url);
+  }
+});
+
+// Lecture vidéo
 document.querySelectorAll("video").forEach(v=>{
-  v.addEventListener("click", ()=>{
-    if(!acces24h && compteur >= limiteVideosGratuites){
-      modalCode.style.display = "flex";
-      return;
-    }
-    v.play();
+  v.addEventListener("play", ()=>{
     compteur++;
-    localStorage.setItem('videos_vues', compteur);
+    if(compteur > limiteVideosGratuites){
+      v.pause();
+      let code = prompt(`Vous avez dépassé votre quota de 2 vidéos gratuites.\nContact admin WhatsApp : 658412230\nEntrez le code d'accès pour continuer :`);
+      if(code === codeAccesCache){
+        alert("Accès validé pour 24h !");
+        localStorage.setItem("accessExpire", Date.now() + dureeAcces);
+        compteur = 0;
+      } else {
+        alert("Code incorrect, accès refusé !");
+      }
+    }
   });
 });
 
-// Validation code d'accès
-btnCodeValider.addEventListener("click", ()=>{
-  if(inputCode.value === codeAccesCache){
-    const expireTime = Date.now() + 24*60*60*1000;
-    localStorage.setItem('videos_expiration', expireTime);
-    compteur = 0;
-    localStorage.setItem('videos_vues', compteur);
-    acces24h = true;
-    modalCode.style.display = "none";
-    alert("Accès accordé pour 24h !");
-    inputCode.value = "";
-  } else {
-    alert("Code incorrect !");
+// Lecture vidéo spécifique par lien
+const params = new URLSearchParams(window.location.search);
+const videoId = params.get("video");
+if(videoId){
+  const targetCard = document.querySelector(`.video-card[data-id="${videoId}"]`);
+  if(targetCard){
+    targetCard.scrollIntoView({behavior:"smooth", block:"center"});
   }
-});
+}
 </script>
+
 </body>
 </html>
