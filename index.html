@@ -3,172 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📺🔞xxx🔞🍒</title>
+<title>Live TV Sécurisé</title>
+
 <style>
-body{margin:0;background:#0b0f1a;color:#fff;font-family:Arial,sans-serif}
-header{padding:12px;background:#11162a;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:bold}
-#clock{font-size:14px;opacity:.9}
+body{
+  margin:0;
+  background:#0b0f1a;
+  font-family:Arial, sans-serif;
+  color:white;
+}
 
-#categories{display:flex;gap:10px;padding:10px;background:#0f1430;overflow-x:auto}
-#categories button{background:#1e245a;border:none;color:#fff;padding:8px 14px;border-radius:6px;cursor:pointer}
-#categories button.active{background:#ff9800;color:#000}
+header{
+  background:#111827;
+  padding:12px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
 
-#panel{height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000;font-size:16px}
-video{width:100%;height:100%;background:#000}
+#categories{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  gap:10px;
+  padding:10px;
+  background:#0f172a;
+}
 
-#controls{display:flex;justify-content:center;gap:20px;padding:12px;background:#0f1430}
-#controls button{background:#ff9800;border:none;padding:10px 18px;font-size:16px;border-radius:8px;font-weight:bold;cursor:pointer}
+.cat-btn{
+  background:#1f2937;
+  border:none;
+  padding:8px 15px;
+  color:white;
+  border-radius:25px;
+  cursor:pointer;
+  flex:0 0 auto;
+}
 
-/* 🔒 LOCK */
-#lock{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
-#lockBox{background:#11162a;padding:25px;border-radius:12px;text-align:center;width:300px}
-#lockBox input{width:100%;padding:10px;font-size:16px;border-radius:6px;border:none;text-align:center}
-#lockBox button{margin-top:10px;width:100%;padding:10px;background:#ff9800;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer}
-#error{color:red;display:none}
+.cat-btn:hover{
+  background:#2563eb;
+}
+
+#player-container{
+  width:100%;
+  height:75vh;
+  background:black;
+  position:relative;
+}
+
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+#controls{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  padding:15px;
+}
+
+.ctrl-btn{
+  background:#2563eb;
+  border:none;
+  padding:8px 18px;
+  color:white;
+  border-radius:25px;
+  cursor:pointer;
+}
+
+.ctrl-btn:hover{
+  background:#1d4ed8;
+}
+
+.fullscreen{
+  background:#16a34a;
+}
+
+#lockScreen{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
+}
+
+#lockScreen input{
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+#lockScreen button{
+  padding:8px 15px;
+  border:none;
+  border-radius:20px;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+}
 </style>
 </head>
+
 <body>
 
-<!-- 🔒 ÉCRAN CODE -->
-<div id="lock">
-  <div id="lockBox">
-    <h3>🔐 Code d’accès</h3>
-    <input id="codeInput" placeholder="Entrer le code">
-    <button id="btnValidate">Valider</button>
-    <div id="error">Code incorrect</div>
-  </div>
-</div>
-
-<header>
-  <span>📡🔞 xxx🔞🍒</span>
-  <span id="clock"></span>
-</header>
+<header>🍒 zones adultes 🔞</header>
 
 <div id="categories"></div>
 
-<div id="panel">
-  <video id="video" controls autoplay muted></video>
+<div id="player-container">
+
+  <div id="lockScreen">
+    <h3>🔒 Accès sécurisé -18 ans</h3>
+      <h4>🔒 acces a toutes les videos 200xaf a whatsapp 658412230</h4>
+    <input type="password" id="accessCode" placeholder="Entrer le code">
+    <button onclick="checkCode()">Valider</button>
+    <p id="errorMsg" style="color:red;"></p>
+  </div>
+
+  <iframe id="player"></iframe>
+
 </div>
 
 <div id="controls">
-  <button onclick="prev()">⏪ Précédent</button>
-  <button onclick="next()">⏩ Suivant</button>
+  <button class="ctrl-btn" onclick="prev()">◀ Précédent</button>
+  <button class="ctrl-btn" onclick="next()">Suivant ▶</button>
+  <button class="ctrl-btn fullscreen" onclick="goFullScreen()">⛶ Plein écran</button>
 </div>
 
-<script> 🔞
-// 🔑 Codes d'accès à toutes les vidéos ou contact admin 200 xaf à WhatsAp 658412230
-const FIRST_CODE = "x2";    // premier accès
-const SECOND_CODE = "x2x";  // accès après fermeture
+<script>
 
-const lock = document.getElementById("lock");
-const codeInput = document.getElementById("codeInput");
-const btnValidate = document.getElementById("btnValidate");
-const errorDiv = document.getElementById("error");
+let unlocked = false;
+let currentIndex = 0;
+let currentList = [];
 
-// On click valider
-btnValidate.addEventListener("click", ()=>{
-    const val = codeInput.value.trim();
-    const stage = localStorage.getItem("first_access_done") ? "second" : "first";
-    if(stage==="first" && val===FIRST_CODE){
-        lock.style.display="none";
-        localStorage.setItem("first_access_done","true");
-        errorDiv.style.display="none";
-    } else if(stage==="second" && val===SECOND_CODE){
-        lock.style.display="none";
-        errorDiv.style.display="none";
-    } else {
-        errorDiv.style.display="block";
-    }
-});
+const validCodes = ["x2","x2x"];
 
-// Au chargement
-window.addEventListener("load", ()=>{
-    const firstDone = localStorage.getItem("first_access_done");
-    if(firstDone){
-        // demande le deuxième code
-        lock.style.display="flex";
-    } else {
-        // premier accès
-        lock.style.display="flex";
-    }
-});
+const videos = {
 
-// ----------------- Liens externes ------------------
-const lives = {
- 
-   "Hétéro":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
-  "Lesbienne":["https://fr.xvideos.com/video.uehviodf2f5/olosho_lesbians_-_girl_on_girl_fun_7"],
-  "Gay Homo":["https://fr.xvideos.com/video.udpdbdkc69f/hot_black_gay_sex_threesome"],
-  "Danse exhibition":["https://fr.xvideos.com/video.iubivud914e/_blank"],
-   "transgenre":["https://fr.xvideos.com/video.icukchh6948/ebony_transgender_babe_tugs_huge_dong"],
-    "partouze":["https://fr.xvideos.com/video.hpkpkpbf3bf/ebony_skyler_nicole_enjoys_anal_sex_and_gangbang"],
-     "cherokee":["https://fr.xvideos.com/video.otlcodvf564/huge_black_dick_pounds_bald_black_pussy_then_leaves_a_cumload_between_big_round_buttocks"],
-      "pipe lecche":["https://fr.xvideos.com/video.uvidaiba47e/licked_pussy_until_she_cums_close_up_pussy_licking"],
-       "pervers":["https://fr.xvideos.com/video.kfmtilhe519/perverse_family_-_extreme_food_fetish_compilation"],
-        "zoophilie ":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
+  "Hétéro": ["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
+  "Lesbienne": ["https://fr.xvideos.com/video.uehviodf2f5/olosho_lesbians_-_girl_on_girl_fun_7"],
+  "Gay Homo": ["https://fr.xvideos.com/video.udpdbdkc69f/hot_black_gay_sex_threesome"],
+  "Danse exhibition": ["https://fr.xvideos.com/video.iubivud914e/_blank"],
+  "Transgenre": ["https://fr.xvideos.com/video.icukchh6948/ebony_transgender_babe_tugs_huge_dong"],
+  "Partouze": ["https://fr.xvideos.com/video.hpkpkpbf3bf/ebony_skyler_nicole_enjoys_anal_sex_and_gangbang"],
+  "Cherokee": ["https://fr.xvideos.com/video.otlcodvf564/huge_black_dick_pounds_bald_black_pussy_then_leaves_a_cumload_between_big_round_buttocks"],
+  "Pipe lecche": ["https://fr.xvideos.com/video.uvidaiba47e/licked_pussy_until_she_cums_close_up_pussy_licking"],
+  "Pervers": ["https://fr.xvideos.com/video.kfmtilhe519/perverse_family_-_extreme_food_fetish_compilation"],
+  "Zoophilie": [""]
+
 };
- 
 
-let cat=null,index=0;
-let playTimer=null;
-const panel=document.getElementById("panel");
-const video=document.getElementById("video");
+/* Création catégories */
+const catContainer = document.getElementById("categories");
 
-// Crée les boutons catégories
-Object.keys(lives).forEach((c,n)=>{
-    const b=document.createElement("button");
-    b.textContent=c;
-    b.onclick=()=>loadCategory(c,b);
-    categories.appendChild(b);
-    if(n===0) b.click();
+Object.keys(videos).forEach(cat => {
+  const btn = document.createElement("button");
+  btn.textContent = cat;
+  btn.className = "cat-btn";
+  btn.onclick = () => loadCategory(cat);
+  catContainer.appendChild(btn);
 });
 
-function loadCategory(c,b){
-    cat=c; index=0;
-    document.querySelectorAll("#categories button").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");
-    playCurrent();
+function checkCode(){
+  const code = document.getElementById("accessCode").value;
+  if(validCodes.includes(code)){
+    unlocked = true;
+    document.getElementById("lockScreen").style.display="none";
+  } else {
+    document.getElementById("errorMsg").innerText="Code incorrect";
+  }
 }
 
-function playCurrent(){
-    if(playTimer){ clearTimeout(playTimer); playTimer=null; }
-    if(!cat || !lives[cat] || lives[cat].length===0){
-        panel.innerHTML="Pas de liens dans cette catégorie";
-        video.style.display="none";
-        return;
-    }
-    const link=lives[cat][index];
+function loadCategory(cat){
+  if(!unlocked){
+    alert("Accès bloqué. Entrer le code.");
+    return;
+  }
+  currentList = videos[cat];
+  currentIndex = 0;
+  loadVideo();
+}
 
-    if(link.endsWith(".mp4")){
-        video.style.display="block";
-        video.src=link;
-        video.autoplay=true;
-        video.play();
-        panel.appendChild(video);
-        video.onended=()=>next(); // autoplay suivant
-    } else {
-        video.style.display="none";
-        panel.innerHTML=`Catégorie : <b>${cat}</b><br>Lien ${index+1} / ${lives[cat].length}<br><br>
-                         <button onclick="window.open('${link}','_blank')">▶ Ouvrir dans un nouvel onglet</button>`;
-        // timer fixe 5 min pour liens externes
-        playTimer=setTimeout(()=>next(),300000);
-    }
+function loadVideo(){
+  if(currentList.length > 0 && currentList[currentIndex] !== ""){
+    window.open(currentList[currentIndex], "_blank", "width=1200,height=800");
+  }
 }
 
 function next(){
-    if(!cat || !lives[cat] || lives[cat].length===0) return;
-    index=(index+1)%lives[cat].length;
-    playCurrent();
+  if(currentIndex < currentList.length - 1){
+    currentIndex++;
+    loadVideo();
+  }
 }
 
 function prev(){
-    if(!cat || !lives[cat] || lives[cat].length===0) return;
-    index=(index-1+lives[cat].length)%lives[cat].length;
-    playCurrent();
+  if(currentIndex > 0){
+    currentIndex--;
+    loadVideo();
+  }
 }
 
-// Horloge
-setInterval(()=>clock.textContent=new Date().toLocaleTimeString(),1000);
+function goFullScreen(){
+  const elem = document.getElementById("player-container");
+  if(elem.requestFullscreen){
+    elem.requestFullscreen();
+  }
+}
+
 </script>
 
 </body>
