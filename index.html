@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>📺 xxx🌶️🔞💋❤️</title>
+<title>📺🔞xxx🔞🍒</title>
 <style>
 body{margin:0;background:#0b0f1a;color:#fff;font-family:Arial,sans-serif}
 header{padding:12px;background:#11162a;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:bold}
@@ -25,7 +25,6 @@ video{width:100%;height:100%;background:#000}
 #lockBox input{width:100%;padding:10px;font-size:16px;border-radius:6px;border:none;text-align:center}
 #lockBox button{margin-top:10px;width:100%;padding:10px;background:#ff9800;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer}
 #error{color:red;display:none}
-#timer{font-size:13px;opacity:.8;margin-top:5px}
 </style>
 </head>
 <body>
@@ -36,13 +35,12 @@ video{width:100%;height:100%;background:#000}
     <h3>🔐 Code d’accès</h3>
     <input id="codeInput" placeholder="Entrer le code">
     <button id="btnValidate">Valider</button>
-    <div id="timer"></div>
     <div id="error">Code incorrect</div>
   </div>
 </div>
 
 <header>
-  <span>📡 xxx🍌🌶️🔞💋</span>
+  <span>📡🔞 xxx🔞🍒</span>
   <span id="clock"></span>
 </header>
 
@@ -58,7 +56,7 @@ video{width:100%;height:100%;background:#000}
 </div>
 
 <script>
-// 🔑 CONFIGURATION CODES
+// 🔑 Codes
 const FIRST_CODE = "x2";    // premier accès
 const SECOND_CODE = "x2x";  // accès après fermeture
 
@@ -66,56 +64,39 @@ const lock = document.getElementById("lock");
 const codeInput = document.getElementById("codeInput");
 const btnValidate = document.getElementById("btnValidate");
 const errorDiv = document.getElementById("error");
-const timerDiv = document.getElementById("timer");
 
-let accessTimer = null;
-let currentStage = "first"; // "first" = premier code, "second" = second code
-
-function checkCode(){
-    let val = codeInput.value.trim();
-    if(currentStage==="first" && val===FIRST_CODE){
-        grantAccess("first");
+// On click valider
+btnValidate.addEventListener("click", ()=>{
+    const val = codeInput.value.trim();
+    const stage = localStorage.getItem("first_access_done") ? "second" : "first";
+    if(stage==="first" && val===FIRST_CODE){
+        lock.style.display="none";
+        localStorage.setItem("first_access_done","true");
         errorDiv.style.display="none";
-    } else if(currentStage==="second" && val===SECOND_CODE){
-        grantAccess("second");
+    } else if(stage==="second" && val===SECOND_CODE){
+        lock.style.display="none";
         errorDiv.style.display="none";
     } else {
         errorDiv.style.display="block";
     }
-}
+});
 
-btnValidate.addEventListener("click", checkCode);
-
-function grantAccess(stage){
-    lock.style.display="none";
-    if(stage==="first"){
-        const expireAt = Date.now() + 24*60*60*1000; // 24h
-        localStorage.setItem("live_access_first", expireAt);
-    }
-    localStorage.setItem("live_access_ok","true"); // accès accordé
-}
-
-// Vérification au chargement
+// Au chargement
 window.addEventListener("load", ()=>{
-    const firstExpire = parseInt(localStorage.getItem("live_access_first"));
-    const accessOk = localStorage.getItem("live_access_ok");
-    if(firstExpire && firstExpire>Date.now() && accessOk){
-        // Premier code valide et pas expiré
-        lock.style.display="none";
-    } else if(accessOk){
-        // Premier code expiré ou fermé → demander second code
-        currentStage="second";
+    const firstDone = localStorage.getItem("first_access_done");
+    if(firstDone){
+        // demande le deuxième code
         lock.style.display="flex";
     } else {
-        // Premier accès
-        currentStage="first";
+        // premier accès
         lock.style.display="flex";
     }
 });
 
 // ----------------- Liens externes ------------------
 const lives = {
-  "Hétéro":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
+ 
+   "Hétéro":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
   "Lesbienne":["https://fr.xvideos.com/video.uehviodf2f5/olosho_lesbians_-_girl_on_girl_fun_7"],
   "Gay Homo":["https://fr.xvideos.com/video.udpdbdkc69f/hot_black_gay_sex_threesome"],
   "Danse exhibition":["https://fr.xvideos.com/video.iubivud914e/_blank"],
@@ -126,6 +107,7 @@ const lives = {
        "pervers":["https://fr.xvideos.com/video.kfmtilhe519/perverse_family_-_extreme_food_fetish_compilation"],
         "zoophilie ":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
 };
+ 
 
 let cat=null,index=0;
 let playTimer=null;
@@ -149,7 +131,6 @@ function loadCategory(c,b){
 }
 
 function playCurrent(){
-    // Clear previous timer
     if(playTimer){ clearTimeout(playTimer); playTimer=null; }
     if(!cat || !lives[cat] || lives[cat].length===0){
         panel.innerHTML="Pas de liens dans cette catégorie";
@@ -164,12 +145,12 @@ function playCurrent(){
         video.autoplay=true;
         video.play();
         panel.appendChild(video);
-        video.onended=()=>next(); // automatique
+        video.onended=()=>next(); // autoplay suivant
     } else {
         video.style.display="none";
         panel.innerHTML=`Catégorie : <b>${cat}</b><br>Lien ${index+1} / ${lives[cat].length}<br><br>
                          <button onclick="window.open('${link}','_blank')">▶ Ouvrir dans un nouvel onglet</button>`;
-        // Timer fixe 5 minutes pour liens externes
+        // timer fixe 5 min pour liens externes
         playTimer=setTimeout(()=>next(),300000);
     }
 }
