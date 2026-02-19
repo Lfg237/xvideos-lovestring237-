@@ -1,317 +1,193 @@
-ki<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>xvideos lovestring237– 18+</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📺 xxx🌶️🔞💋❤️</title>
 <style>
-body{
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:#121212;
-  color:#fff;
-  overflow-x:hidden;
-}
-header{
-  position:sticky;
-  top:0;
-  background:#1f1f1f;
-  padding:15px 20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:1000;
-  box-shadow:0 2px 5px rgba(0,0,0,0.5);
-}
-.header-title{
-  font-size:22px;
-  font-weight:bold;
-  color:#4ea1ff;
-}
-.category{
-  margin:25px 0;
-}
-.category h2{
-  margin:0 0 10px 20px;
-  font-size:20px;
-  color:#4ea1ff;
-}
-.row{
-  display:flex;
-  gap:15px;
-  overflow-x:auto;
-  padding:0 20px 20px 20px;
-  scroll-behavior:smooth;
-}
-.video-card{
-  min-width:300px;
-  background:#1a1a1a;
-  border-radius:12px;
-  overflow:hidden;
-  flex-shrink:0;
-  position:relative;
-  box-shadow:0 2px 8px rgba(0,0,0,0.6);
-  display:flex;
-  flex-direction:column;
-}
-.video-wrapper{
-  position:relative;
-  width:100%;
-  height:400px; /* hauteur adaptée */
-  background:#000;
-}
-.video-wrapper iframe, .video-wrapper video{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
-.video-title{
-  position:absolute;
-  bottom:10px;
-  left:10px;
-  color:#4ea1ff;
-  font-size:16px;
-  font-weight:bold;
-  text-shadow:1px 1px 5px rgba(0,0,0,0.7);
-  z-index:10;
-}
-.actions{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:10px;
-  background:#1b1b1b;
-}
-.actions button{
-  background:none;
-  border:none;
-  color:#4ea1ff;
-  font-size:18px;
-  cursor:pointer;
-  text-decoration:none;
-  padding:5px 10px;
-  border-radius:5px;
-  transition:0.2s;
-}
-.actions button:hover{
-  background:#2a2a2a;
-}
-footer{
-  background:#1f1f1f;
-  color:#777;
-  text-align:center;
-  padding:15px;
-  font-size:14px;
-  position:relative;
-}
-.modal{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.85);
-  z-index:2000;
-  flex-direction:column;
-}
-.modal h1{
-  color:#fff;
-  margin-bottom:20px;
-  text-align:center;
-}
-.modal button{
-  margin:10px;
-  padding:12px 25px;
-  font-size:16px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#4ea1ff;
-  color:#fff;
-  transition:0.2s;
-}
-.modal button:hover{
-  background:#3390ff;
-}
+body{margin:0;background:#0b0f1a;color:#fff;font-family:Arial,sans-serif}
+header{padding:12px;background:#11162a;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:bold}
+#clock{font-size:14px;opacity:.9}
+
+#categories{display:flex;gap:10px;padding:10px;background:#0f1430;overflow-x:auto}
+#categories button{background:#1e245a;border:none;color:#fff;padding:8px 14px;border-radius:6px;cursor:pointer}
+#categories button.active{background:#ff9800;color:#000}
+
+#panel{height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000;font-size:16px}
+video{width:100%;height:100%;background:#000}
+
+#controls{display:flex;justify-content:center;gap:20px;padding:12px;background:#0f1430}
+#controls button{background:#ff9800;border:none;padding:10px 18px;font-size:16px;border-radius:8px;font-weight:bold;cursor:pointer}
+
+/* 🔒 LOCK */
+#lock{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999}
+#lockBox{background:#11162a;padding:25px;border-radius:12px;text-align:center;width:300px}
+#lockBox input{width:100%;padding:10px;font-size:16px;border-radius:6px;border:none;text-align:center}
+#lockBox button{margin-top:10px;width:100%;padding:10px;background:#ff9800;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer}
+#error{color:red;display:none}
+#timer{font-size:13px;opacity:.8;margin-top:5px}
 </style>
 </head>
 <body>
 
-<div class="modal" id="modal18">
-  <h1>Êtes-vous majeur (18+) ?</h1>
-  <div>
-    <button id="btnOui">Oui</button>
-    <button id="btnNon">Non</button>
+<!-- 🔒 ÉCRAN CODE -->
+<div id="lock">
+  <div id="lockBox">
+    <h3>🔐 Code d’accès</h3>
+    <input id="codeInput" placeholder="Entrer le code">
+    <button id="btnValidate">Valider</button>
+    <div id="timer"></div>
+    <div id="error">Code incorrect</div>
   </div>
 </div>
 
 <header>
-  <div class="header-title">xvideos lovestring237 18+</div>
+  <span>📡 xxx🍌🌶️🔞💋</span>
+  <span id="clock"></span>
 </header>
 
-<div id="categories-container"></div>
+<div id="categories"></div>
 
-<footer>Business TV – 18+ Only</footer>
+<div id="panel">
+  <video id="video" controls autoplay muted></video>
+</div>
+
+<div id="controls">
+  <button onclick="prev()">⏪ Précédent</button>
+  <button onclick="next()">⏩ Suivant</button>
+</div>
 
 <script>
-// ==============================
-// CONFIGURATION CATÉGORIES + VIDÉOS
-// ==============================
-const categories = {
-  "Hétéro": [
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0008.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0009.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0013.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0013.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0022.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250905-WA0019.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20251028-WA0005.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20251028-WA0007.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20251028-WA0007.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20260130-WA0039.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20260131-WA0033.mp4",
- "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20260131-WA0055.mp4",  
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20260131-WA0076.mp4",
-"", "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ],
-  "Lesbienne": [
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ],
-  "Homo": [
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/2_Milkers_lait_King_Beef_1.mp4",
-   "", "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ],
-  "Transgenre": [
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/Babe_transgenre_%C3%A9b%C3%A8ne_remorqueurs_%C3%A9norme_dong_1.mp4",
-"https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20260131-WA0055.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ],
-  "Zoophilie": [
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ],
-  "Exhibition": [
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0003.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0004.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0006.mp4",
-    "https://mmmptafgsvqxpqsk.public.blob.vercel-storage.com/VID-20250625-WA0007.mp4"
-  ]
+// 🔑 CONFIGURATION CODES
+const FIRST_CODE = "x2";    // premier accès
+const SECOND_CODE = "x2x";  // accès après fermeture
+
+const lock = document.getElementById("lock");
+const codeInput = document.getElementById("codeInput");
+const btnValidate = document.getElementById("btnValidate");
+const errorDiv = document.getElementById("error");
+const timerDiv = document.getElementById("timer");
+
+let accessTimer = null;
+let currentStage = "first"; // "first" = premier code, "second" = second code
+
+function checkCode(){
+    let val = codeInput.value.trim();
+    if(currentStage==="first" && val===FIRST_CODE){
+        grantAccess("first");
+        errorDiv.style.display="none";
+    } else if(currentStage==="second" && val===SECOND_CODE){
+        grantAccess("second");
+        errorDiv.style.display="none";
+    } else {
+        errorDiv.style.display="block";
+    }
+}
+
+btnValidate.addEventListener("click", checkCode);
+
+function grantAccess(stage){
+    lock.style.display="none";
+    if(stage==="first"){
+        const expireAt = Date.now() + 24*60*60*1000; // 24h
+        localStorage.setItem("live_access_first", expireAt);
+    }
+    localStorage.setItem("live_access_ok","true"); // accès accordé
+}
+
+// Vérification au chargement
+window.addEventListener("load", ()=>{
+    const firstExpire = parseInt(localStorage.getItem("live_access_first"));
+    const accessOk = localStorage.getItem("live_access_ok");
+    if(firstExpire && firstExpire>Date.now() && accessOk){
+        // Premier code valide et pas expiré
+        lock.style.display="none";
+    } else if(accessOk){
+        // Premier code expiré ou fermé → demander second code
+        currentStage="second";
+        lock.style.display="flex";
+    } else {
+        // Premier accès
+        currentStage="first";
+        lock.style.display="flex";
+    }
+});
+
+// ----------------- Liens externes ------------------
+const lives = {
+  "Hétéro":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
+  "Lesbienne":["https://fr.xvideos.com/video.uehviodf2f5/olosho_lesbians_-_girl_on_girl_fun_7"],
+  "Gay Homo":["https://fr.xvideos.com/video.udpdbdkc69f/hot_black_gay_sex_threesome"],
+  "Danse exhibition":["https://fr.xvideos.com/video.iubivud914e/_blank"],
+   "transgenre":["https://fr.xvideos.com/video.icukchh6948/ebony_transgender_babe_tugs_huge_dong"],
+    "partouze":["https://fr.xvideos.com/video.hpkpkpbf3bf/ebony_skyler_nicole_enjoys_anal_sex_and_gangbang"],
+     "cherokee":["https://fr.xvideos.com/video.otlcodvf564/huge_black_dick_pounds_bald_black_pussy_then_leaves_a_cumload_between_big_round_buttocks"],
+      "pipe lecche":["https://fr.xvideos.com/video.uvidaiba47e/licked_pussy_until_she_cums_close_up_pussy_licking"],
+       "pervers":["https://fr.xvideos.com/video.kfmtilhe519/perverse_family_-_extreme_food_fetish_compilation"],
+        "zoophilie ":["https://fr.xvideos.com/video.oupdkle6b1d/black_mom_destroyed_by_bbc"],
 };
 
-// ==============================
-// GENERATION DU SITE
-// ==============================
-const container = document.getElementById("categories-container");
-for(const cat in categories){
-  const catDiv = document.createElement("div");
-  catDiv.className = "category";
-  catDiv.innerHTML = `<h2>${cat}</h2>`;
-  const rowDiv = document.createElement("div");
-  rowDiv.className = "row";
+let cat=null,index=0;
+let playTimer=null;
+const panel=document.getElementById("panel");
+const video=document.getElementById("video");
 
-  categories[cat].forEach((vid, index)=>{
-    const card = document.createElement("div");
-    card.className = "video-card";
-    card.dataset.id = `${cat}${index+1}`;
-    card.innerHTML = `
-      <div class="video-wrapper">
-        <video src="${vid}" controls></video>
-        <div class="video-title">${cat} ${index+1}</div>
-      </div>
-      <div class="actions">
-        <button class="copy-link">🔗 Partager</button>
-      </div>
-    `;
-    rowDiv.appendChild(card);
-  });
+// Crée les boutons catégories
+Object.keys(lives).forEach((c,n)=>{
+    const b=document.createElement("button");
+    b.textContent=c;
+    b.onclick=()=>loadCategory(c,b);
+    categories.appendChild(b);
+    if(n===0) b.click();
+});
 
-  catDiv.appendChild(rowDiv);
-  container.appendChild(catDiv);
+function loadCategory(c,b){
+    cat=c; index=0;
+    document.querySelectorAll("#categories button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    playCurrent();
 }
 
-// ==============================
-// LOGIQUE POPUP 18+ & PARTAGE & RESTRICTION
-// ==============================
-let compteur = 0;
-const limiteVideosGratuites = 2;
-const codeAccesCache = "233233";
-const dureeAcces = 24*60*60*1000; // 24h
-
-const modal18 = document.getElementById("modal18");
-const btnOui = document.getElementById("btnOui");
-const btnNon = document.getElementById("btnNon");
-
-btnOui.addEventListener("click", ()=>{
-  modal18.style.display = "none";
-});
-btnNon.addEventListener("click", ()=>{
-  alert("Vous devez être majeur pour accéder au site.");
-  window.close();
-});
-
-// Vérifier accès précédent
-let accessExpire = localStorage.getItem("accessExpire");
-if(accessExpire && Date.now() < accessExpire){
-  compteur = limiteVideosGratuites;
-}
-
-// Partager le lien vidéo
-document.addEventListener("click", e=>{
-  if(e.target.classList.contains("copy-link")){
-    const videoCard = e.target.closest(".video-card");
-    const videoId = videoCard.dataset.id;
-    const url = `https://xvideos-lovestring237.vercel.app/?video=${videoId}`;
-    navigator.clipboard.writeText(url);
-    alert("Lien copié : " + url);
-  }
-});
-
-// Lecture vidéo
-document.querySelectorAll("video").forEach(v=>{
-  v.addEventListener("play", ()=>{
-    compteur++;
-    if(compteur > limiteVideosGratuites){
-      v.pause();
-      let code = prompt(`Vous avez dépassé votre quota de 2 vidéos gratuites.\nContact admin WhatsApp : 658412230\nEntrez le code d'accès pour continuer :`);
-      if(code === codeAccesCache){
-        alert("Accès validé pour 24h !");
-        localStorage.setItem("accessExpire", Date.now() + dureeAcces);
-        compteur = 0;
-      } else {
-        alert("Code incorrect, accès refusé !");
-      }
+function playCurrent(){
+    // Clear previous timer
+    if(playTimer){ clearTimeout(playTimer); playTimer=null; }
+    if(!cat || !lives[cat] || lives[cat].length===0){
+        panel.innerHTML="Pas de liens dans cette catégorie";
+        video.style.display="none";
+        return;
     }
-  });
-});
+    const link=lives[cat][index];
 
-// Lecture vidéo spécifique par lien
-const params = new URLSearchParams(window.location.search);
-const videoId = params.get("video");
-if(videoId){
-  const targetCard = document.querySelector(`.video-card[data-id="${videoId}"]`);
-  if(targetCard){
-    targetCard.scrollIntoView({behavior:"smooth", block:"center"});
-  }
+    if(link.endsWith(".mp4")){
+        video.style.display="block";
+        video.src=link;
+        video.autoplay=true;
+        video.play();
+        panel.appendChild(video);
+        video.onended=()=>next(); // automatique
+    } else {
+        video.style.display="none";
+        panel.innerHTML=`Catégorie : <b>${cat}</b><br>Lien ${index+1} / ${lives[cat].length}<br><br>
+                         <button onclick="window.open('${link}','_blank')">▶ Ouvrir dans un nouvel onglet</button>`;
+        // Timer fixe 5 minutes pour liens externes
+        playTimer=setTimeout(()=>next(),300000);
+    }
 }
+
+function next(){
+    if(!cat || !lives[cat] || lives[cat].length===0) return;
+    index=(index+1)%lives[cat].length;
+    playCurrent();
+}
+
+function prev(){
+    if(!cat || !lives[cat] || lives[cat].length===0) return;
+    index=(index-1+lives[cat].length)%lives[cat].length;
+    playCurrent();
+}
+
+// Horloge
+setInterval(()=>clock.textContent=new Date().toLocaleTimeString(),1000);
 </script>
 
 </body>
