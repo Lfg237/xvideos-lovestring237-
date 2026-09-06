@@ -234,4 +234,125 @@ const videoLinks=[
   'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260905-WA0046.mp4',
   'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260905-WA0044.mp4',
   'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260905-WA0043.mp4',
-  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/V
+   'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260217-WA0011.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260217-WA0009.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/Wet_Pussy_Amateur_Martel%C3%A9_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/Vivian_Taylor_huil%C3%A9e_pour_Don_et_Kaby_-_Porno_interracial_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/Vid%C3%A9o_de_twerk_de_Lexi_Luv_Films_pour_petit_ami_et_infid%C3%A8les_-_Porno_%C3%A9b%C3%A8ne_BBC_Facial_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260905-WA0049.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/VID-20260905-WA0048.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/strip-teaseuse_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/lesbiennes_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/femmes_blanches_vs_grosses_bites_noires_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/extr%C3%AAme_bbw_africaine_ext%C3%A9rieure_bdsm_le%C3%A7on_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/df504b0451f1f1a37e27f7ffa46a33dd_169-1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/%C3%89norme_cul_d%C3%A9esse_africaine_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/%C3%89jaculation_f%C3%A9minine_1.mp4',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/xvideos.com_f8e135d64c38b08fc935b894e0ff7ed8_1.mp4'
+];
+const imageLinks=[
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/IMG-20260904-WA0012.jpg',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/IMG-20260904-WA0023.jpg',
+  'https://raw.githubusercontent.com/Lfg237/fichier-vid-o-/main/IMG-20260904-WA0021.jpg'
+];
+
+const categories=document.getElementById("categories");
+const videoList=document.getElementById("video-list");
+const player=document.getElementById("player");
+const imageViewer=document.getElementById("imageViewer");
+
+function createCategories(){
+  categories.innerHTML="";
+  ["Vidéos","Images"].forEach((name,index)=>{
+    const btn=document.createElement("button");
+    btn.textContent=name;
+    btn.className="cat-btn";
+    btn.onclick=()=>loadCategory(index===0?"video":"image",btn);
+    categories.appendChild(btn);
+  });
+}
+
+function loadCategory(type,btn){
+  if(!unlocked){
+    alert("🔒 Accès bloqué. Entrer le code.");
+    return;
+  }
+  currentType=type;
+  currentList=type==="video"?videoLinks:imageLinks;
+  currentIndex=0;
+  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  videoList.innerHTML="";
+  if(!currentList.length){
+    videoList.innerHTML='<div class="empty">Aucun élément dans cette catégorie.</div>';
+    return;
+  }
+  currentList.forEach((url,index)=>{
+    const item=document.createElement("div");
+    item.className="video-item";
+    const name=document.createElement("span");
+    name.textContent=(type==="video"?"🎬 Vidéo ":"🖼️ Image ")+(index+1);
+    const button=document.createElement("button");
+    button.className="play-btn";
+    button.textContent=type==="video"?"▶ Lire":"👁️ Voir";
+    button.onclick=()=>{currentIndex=index;loadMedia();};
+    item.appendChild(name);
+    item.appendChild(button);
+    videoList.appendChild(item);
+  });
+  loadMedia();
+}
+
+function checkCode(){
+  const code=document.getElementById("accessCode").value.trim();
+  if(validCodes.includes(code)){
+    unlocked=true;
+    document.getElementById("lockScreen").style.display="none";
+    loadCategory("video",document.querySelector(".cat-btn"));
+  }else{
+    document.getElementById("errorMsg").innerText="❌ Code incorrect";
+  }
+}
+
+function loadMedia(){
+  if(!currentList.length || !currentList[currentIndex]) return;
+  const url=currentList[currentIndex];
+  if(currentType==="video"){
+    imageViewer.style.display="none";
+    player.style.display="block";
+    player.src=url;
+    player.load();
+    player.play().catch(()=>{});
+  }else{
+    player.pause();
+    player.removeAttribute("src");
+    player.load();
+    player.style.display="none";
+    imageViewer.style.display="block";
+    imageViewer.src=url;
+  }
+}
+
+function next(){
+  if(currentIndex<currentList.length-1){currentIndex++;loadMedia();}
+}
+function prev(){
+  if(currentIndex>0){currentIndex--;loadMedia();}
+}
+function goFullScreen(){
+  const elem=document.getElementById("player-container");
+  if(elem.requestFullscreen) elem.requestFullscreen();
+}
+
+player.addEventListener("ended",()=>{
+  if(currentType==="video" && currentIndex<currentList.length-1){
+    currentIndex++;
+    loadMedia();
+  }
+});
+
+createCategories();
+videoList.innerHTML="";
+</script>
+</body>
+</html>
